@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69AA11AE1C0B9DE200A1F53F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AA11AD1C0B9DE200A1F53F /* LoginViewController.m */; };
+		69AA11B21C0BC0A700A1F53F /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AA11B11C0BC0A700A1F53F /* CustomTextField.m */; };
+		69AA11B41C0BCBCA00A1F53F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69AA11B31C0BCBCA00A1F53F /* OpenSans-Regular.ttf */; };
+		69AA11B71C0BCD8500A1F53F /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69AA11B61C0BCD8500A1F53F /* OpenSans-Bold.ttf */; };
+		69AA11BB1C0BE38000A1F53F /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AA11BA1C0BE38000A1F53F /* RegisterViewController.m */; };
+		69B438741C05FD61007B0DE6 /* FollowersFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B438731C05FD61007B0DE6 /* FollowersFollowingViewController.m */; };
+		69B438771C06024E007B0DE6 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B438761C06024E007B0DE6 /* AddViewController.m */; };
+		69B4387A1C060495007B0DE6 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B438791C060495007B0DE6 /* ExploreViewController.m */; };
+		69EDAF2E1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EDAF2D1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m */; };
+		69F48B6E1BF7AF76008A7CC4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F48B6D1BF7AF76008A7CC4 /* ProfileViewController.m */; };
+		69F48B701BF7B5AC008A7CC4 /* profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69F48B6F1BF7B5AC008A7CC4 /* profile.jpg */; };
+		69FD8B591C0C0F4900EEBE83 /* CreateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B581C0C0F4900EEBE83 /* CreateProfileViewController.m */; };
+		69FD8B6E1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B5C1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m */; };
+		69FD8B6F1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B5E1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.m */; };
+		69FD8B701C0D6AEE00EEBE83 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B601C0D6AEE00EEBE83 /* AFHTTPSessionManager.m */; };
+		69FD8B711C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B631C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m */; };
+		69FD8B721C0D6AEE00EEBE83 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B651C0D6AEE00EEBE83 /* AFSecurityPolicy.m */; };
+		69FD8B731C0D6AEE00EEBE83 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B671C0D6AEE00EEBE83 /* AFURLConnectionOperation.m */; };
+		69FD8B741C0D6AEE00EEBE83 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B691C0D6AEE00EEBE83 /* AFURLRequestSerialization.m */; };
+		69FD8B751C0D6AEE00EEBE83 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B6B1C0D6AEE00EEBE83 /* AFURLResponseSerialization.m */; };
+		69FD8B761C0D6AEE00EEBE83 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8B6D1C0D6AEE00EEBE83 /* AFURLSessionManager.m */; };
+		B00664DD1BFEA55A0061B35B /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */; };
+		B00664E01BFEA7260061B35B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00664DF1BFEA7260061B35B /* MapViewController.m */; };
+		B00664E21BFEA95D0061B35B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00664E11BFEA95D0061B35B /* MapKit.framework */; };
+		B05E3AA81C15FDC60000B3DF /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05E3AA71C15FDC60000B3DF /* LaunchViewController.m */; };
+		B0D91B141C0F4883002567E8 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D91B131C0F4883002567E8 /* HomeTableViewCell.m */; };
+		B0D91B181C0F4EC9002567E8 /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D91B171C0F4EC9002567E8 /* BaseTabBarViewController.m */; };
 		B0E146481BF55E9500A8A024 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E146471BF55E9500A8A024 /* main.m */; };
 		B0E1464B1BF55E9500A8A024 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1464A1BF55E9500A8A024 /* AppDelegate.m */; };
 		B0E1464E1BF55E9500A8A024 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1464D1BF55E9500A8A024 /* ViewController.m */; };
@@ -35,6 +62,58 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69AA11AC1C0B9DE100A1F53F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		69AA11AD1C0B9DE200A1F53F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		69AA11B01C0BC0A700A1F53F /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		69AA11B11C0BC0A700A1F53F /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
+		69AA11B31C0BCBCA00A1F53F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		69AA11B51C0BCD1000A1F53F /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		69AA11B61C0BCD8500A1F53F /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		69AA11B91C0BE37F00A1F53F /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		69AA11BA1C0BE38000A1F53F /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		69B438721C05FD61007B0DE6 /* FollowersFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersFollowingViewController.h; sourceTree = "<group>"; };
+		69B438731C05FD61007B0DE6 /* FollowersFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersFollowingViewController.m; sourceTree = "<group>"; };
+		69B438751C06024E007B0DE6 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		69B438761C06024E007B0DE6 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		69B438781C060495007B0DE6 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		69B438791C060495007B0DE6 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		69EDAF2C1BFA7F8D00F8FBF2 /* ProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInfoTableViewCell.h; sourceTree = "<group>"; };
+		69EDAF2D1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInfoTableViewCell.m; sourceTree = "<group>"; };
+		69F48B6C1BF7AF76008A7CC4 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		69F48B6D1BF7AF76008A7CC4 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		69F48B6F1BF7B5AC008A7CC4 /* profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile.jpg; sourceTree = "<group>"; };
+		69FD8B571C0C0F4900EEBE83 /* CreateProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateProfileViewController.h; sourceTree = "<group>"; };
+		69FD8B581C0C0F4900EEBE83 /* CreateProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateProfileViewController.m; sourceTree = "<group>"; };
+		69FD8B5B1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		69FD8B5C1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		69FD8B5D1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		69FD8B5E1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		69FD8B5F1C0D6AEE00EEBE83 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		69FD8B601C0D6AEE00EEBE83 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		69FD8B611C0D6AEE00EEBE83 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		69FD8B621C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		69FD8B631C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		69FD8B641C0D6AEE00EEBE83 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		69FD8B651C0D6AEE00EEBE83 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		69FD8B661C0D6AEE00EEBE83 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		69FD8B671C0D6AEE00EEBE83 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		69FD8B681C0D6AEE00EEBE83 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		69FD8B691C0D6AEE00EEBE83 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		69FD8B6A1C0D6AEE00EEBE83 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		69FD8B6B1C0D6AEE00EEBE83 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		69FD8B6C1C0D6AEE00EEBE83 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		69FD8B6D1C0D6AEE00EEBE83 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		B00664DB1BFEA55A0061B35B /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		B00664DE1BFEA7260061B35B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		B00664DF1BFEA7260061B35B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		B00664E11BFEA95D0061B35B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B05E3AA61C15FDC60000B3DF /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		B05E3AA71C15FDC60000B3DF /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		B0D91B121C0F4883002567E8 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		B0D91B131C0F4883002567E8 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		B0D91B161C0F4EC9002567E8 /* BaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
+		B0D91B171C0F4EC9002567E8 /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		B0E146431BF55E9500A8A024 /* Blizky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blizky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E146471BF55E9500A8A024 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B0E146491BF55E9500A8A024 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00664E21BFEA95D0061B35B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,9 +158,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69AA11AF1C0BC01700A1F53F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B05E3AA61C15FDC60000B3DF /* LaunchViewController.h */,
+				B05E3AA71C15FDC60000B3DF /* LaunchViewController.m */,
+				69AA11AC1C0B9DE100A1F53F /* LoginViewController.h */,
+				69AA11AD1C0B9DE200A1F53F /* LoginViewController.m */,
+				69AA11B01C0BC0A700A1F53F /* CustomTextField.h */,
+				69AA11B11C0BC0A700A1F53F /* CustomTextField.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		69AA11B81C0BE34A00A1F53F /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				69AA11B91C0BE37F00A1F53F /* RegisterViewController.h */,
+				69AA11BA1C0BE38000A1F53F /* RegisterViewController.m */,
+				69FD8B571C0C0F4900EEBE83 /* CreateProfileViewController.h */,
+				69FD8B581C0C0F4900EEBE83 /* CreateProfileViewController.m */,
+			);
+			name = Register;
+			sourceTree = "<group>";
+		};
+		69FD8B5A1C0D6A6300EEBE83 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				69FD8B5B1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.h */,
+				69FD8B5C1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m */,
+				69FD8B5D1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.h */,
+				69FD8B5E1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.m */,
+				69FD8B5F1C0D6AEE00EEBE83 /* AFHTTPSessionManager.h */,
+				69FD8B601C0D6AEE00EEBE83 /* AFHTTPSessionManager.m */,
+				69FD8B611C0D6AEE00EEBE83 /* AFNetworking.h */,
+				69FD8B621C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.h */,
+				69FD8B631C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m */,
+				69FD8B641C0D6AEE00EEBE83 /* AFSecurityPolicy.h */,
+				69FD8B651C0D6AEE00EEBE83 /* AFSecurityPolicy.m */,
+				69FD8B661C0D6AEE00EEBE83 /* AFURLConnectionOperation.h */,
+				69FD8B671C0D6AEE00EEBE83 /* AFURLConnectionOperation.m */,
+				69FD8B681C0D6AEE00EEBE83 /* AFURLRequestSerialization.h */,
+				69FD8B691C0D6AEE00EEBE83 /* AFURLRequestSerialization.m */,
+				69FD8B6A1C0D6AEE00EEBE83 /* AFURLResponseSerialization.h */,
+				69FD8B6B1C0D6AEE00EEBE83 /* AFURLResponseSerialization.m */,
+				69FD8B6C1C0D6AEE00EEBE83 /* AFURLSessionManager.h */,
+				69FD8B6D1C0D6AEE00EEBE83 /* AFURLSessionManager.m */,
+			);
+			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		B0D91B111C0F4866002567E8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B0E1464C1BF55E9500A8A024 /* ViewController.h */,
+				B0E1464D1BF55E9500A8A024 /* ViewController.m */,
+				B0D91B121C0F4883002567E8 /* HomeTableViewCell.h */,
+				B0D91B131C0F4883002567E8 /* HomeTableViewCell.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		B0D91B151C0F4E9A002567E8 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B0D91B161C0F4EC9002567E8 /* BaseTabBarViewController.h */,
+				B0D91B171C0F4EC9002567E8 /* BaseTabBarViewController.m */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		B0D91B191C0F7DAC002567E8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				69F48B6C1BF7AF76008A7CC4 /* ProfileViewController.h */,
+				69F48B6D1BF7AF76008A7CC4 /* ProfileViewController.m */,
+				69EDAF2C1BFA7F8D00F8FBF2 /* ProfileInfoTableViewCell.h */,
+				69EDAF2D1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		B0E1463A1BF55E9500A8A024 = {
 			isa = PBXGroup;
 			children = (
+				B00664E11BFEA95D0061B35B /* MapKit.framework */,
 				B0E146451BF55E9500A8A024 /* Blizky */,
 				B0E1465F1BF55E9500A8A024 /* BlizkyTests */,
 				B0E1466A1BF55E9500A8A024 /* BlizkyUITests */,
@@ -101,14 +263,29 @@
 		B0E146451BF55E9500A8A024 /* Blizky */ = {
 			isa = PBXGroup;
 			children = (
+				69F48B6F1BF7B5AC008A7CC4 /* profile.jpg */,
 				B0E146491BF55E9500A8A024 /* AppDelegate.h */,
 				B0E1464A1BF55E9500A8A024 /* AppDelegate.m */,
-				B0E1464C1BF55E9500A8A024 /* ViewController.h */,
-				B0E1464D1BF55E9500A8A024 /* ViewController.m */,
+				69AA11AF1C0BC01700A1F53F /* Login */,
+				69AA11B81C0BE34A00A1F53F /* Register */,
+				B0D91B151C0F4E9A002567E8 /* TabBar */,
+				B0D91B111C0F4866002567E8 /* Home */,
+				B0D91B191C0F7DAC002567E8 /* Profile */,
+				B00664DB1BFEA55A0061B35B /* EditProfileViewController.h */,
+				B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */,
+				69B438721C05FD61007B0DE6 /* FollowersFollowingViewController.h */,
+				69B438731C05FD61007B0DE6 /* FollowersFollowingViewController.m */,
+				69B438751C06024E007B0DE6 /* AddViewController.h */,
+				69B438761C06024E007B0DE6 /* AddViewController.m */,
+				B00664DE1BFEA7260061B35B /* MapViewController.h */,
+				B00664DF1BFEA7260061B35B /* MapViewController.m */,
+				69B438781C060495007B0DE6 /* ExploreViewController.h */,
+				69B438791C060495007B0DE6 /* ExploreViewController.m */,
 				B0E1464F1BF55E9500A8A024 /* Main.storyboard */,
 				B0E146521BF55E9500A8A024 /* Assets.xcassets */,
 				B0E146541BF55E9500A8A024 /* LaunchScreen.storyboard */,
 				B0E146571BF55E9500A8A024 /* Info.plist */,
+				69FD8B5A1C0D6A6300EEBE83 /* AFNetworking */,
 				B0E146461BF55E9500A8A024 /* Supporting Files */,
 			);
 			path = Blizky;
@@ -117,6 +294,9 @@
 		B0E146461BF55E9500A8A024 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				69AA11B31C0BCBCA00A1F53F /* OpenSans-Regular.ttf */,
+				69AA11B51C0BCD1000A1F53F /* OpenSans-Semibold.ttf */,
+				69AA11B61C0BCD8500A1F53F /* OpenSans-Bold.ttf */,
 				B0E146471BF55E9500A8A024 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -243,8 +423,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69AA11B41C0BCBCA00A1F53F /* OpenSans-Regular.ttf in Resources */,
 				B0E146561BF55E9500A8A024 /* LaunchScreen.storyboard in Resources */,
+				69AA11B71C0BCD8500A1F53F /* OpenSans-Bold.ttf in Resources */,
 				B0E146531BF55E9500A8A024 /* Assets.xcassets in Resources */,
+				69F48B701BF7B5AC008A7CC4 /* profile.jpg in Resources */,
 				B0E146511BF55E9500A8A024 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,9 +453,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69B4387A1C060495007B0DE6 /* ExploreViewController.m in Sources */,
 				B0E1464E1BF55E9500A8A024 /* ViewController.m in Sources */,
+				B0D91B181C0F4EC9002567E8 /* BaseTabBarViewController.m in Sources */,
+				B05E3AA81C15FDC60000B3DF /* LaunchViewController.m in Sources */,
+				B0D91B141C0F4883002567E8 /* HomeTableViewCell.m in Sources */,
 				B0E1464B1BF55E9500A8A024 /* AppDelegate.m in Sources */,
+				69B438741C05FD61007B0DE6 /* FollowersFollowingViewController.m in Sources */,
+				69FD8B751C0D6AEE00EEBE83 /* AFURLResponseSerialization.m in Sources */,
+				69FD8B731C0D6AEE00EEBE83 /* AFURLConnectionOperation.m in Sources */,
+				69FD8B591C0C0F4900EEBE83 /* CreateProfileViewController.m in Sources */,
+				69AA11B21C0BC0A700A1F53F /* CustomTextField.m in Sources */,
+				69FD8B6F1C0D6AEE00EEBE83 /* AFHTTPRequestOperationManager.m in Sources */,
+				B00664DD1BFEA55A0061B35B /* EditProfileViewController.m in Sources */,
+				69FD8B721C0D6AEE00EEBE83 /* AFSecurityPolicy.m in Sources */,
+				69F48B6E1BF7AF76008A7CC4 /* ProfileViewController.m in Sources */,
 				B0E146481BF55E9500A8A024 /* main.m in Sources */,
+				69FD8B741C0D6AEE00EEBE83 /* AFURLRequestSerialization.m in Sources */,
+				69FD8B711C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m in Sources */,
+				69EDAF2E1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m in Sources */,
+				69AA11BB1C0BE38000A1F53F /* RegisterViewController.m in Sources */,
+				B00664E01BFEA7260061B35B /* MapViewController.m in Sources */,
+				69FD8B6E1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m in Sources */,
+				69AA11AE1C0B9DE200A1F53F /* LoginViewController.m in Sources */,
+				69FD8B701C0D6AEE00EEBE83 /* AFHTTPSessionManager.m in Sources */,
+				69B438771C06024E007B0DE6 /* AddViewController.m in Sources */,
+				69FD8B761C0D6AEE00EEBE83 /* AFURLSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +702,7 @@
 				B0E146721BF55E9500A8A024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0E146731BF55E9500A8A024 /* Build configuration list for PBXNativeTarget "BlizkyTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +711,7 @@
 				B0E146751BF55E9500A8A024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0E146761BF55E9500A8A024 /* Build configuration list for PBXNativeTarget "BlizkyUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +720,7 @@
 				B0E146781BF55E9500A8A024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

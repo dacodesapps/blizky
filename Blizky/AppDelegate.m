@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BaseTabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+//    BaseTabBarViewController *tabBar = (BaseTabBarViewController *)self.window.rootViewController;
+//    tabBar.selectedIndex = 2;
+    
     return YES;
 }
 
