@@ -21,6 +21,8 @@
     
 //    BaseTabBarViewController *tabBar = (BaseTabBarViewController *)self.window.rootViewController;
 //    tabBar.selectedIndex = 2;
+    [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"OpenSans-Bold" size:9.0f], NSFontAttributeName,[UIFont boldSystemFontOfSize:9.0f],NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
     
     return YES;
 }

@@ -10,7 +10,7 @@
 #import "HomeTableViewCell.h"
 #import "AFNetworking.h"
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) UISearchBar *mySearchBar;
@@ -33,6 +33,7 @@
     self.myTableView.dataSource=self;
     
     self.mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
+    self.mySearchBar.delegate=self;
     
     self.myTableView.tableHeaderView = self.mySearchBar;
     
@@ -48,6 +49,28 @@
     [self performSelector:@selector(hideSearchBar) withObject:nil afterDelay:0.0f];
     
     [self fetchSaveServices:nil];
+//    for (int i=0; i<[[UIFont familyNames] count]; i++) {
+//        if ([[UIFont familyNames][i] containsString:@"Semibold"]) {
+//            NSLog(@"Semibold: %@",[UIFont familyNames][i]);
+//        }
+//    }
+
+    //NSLog (@"Font families: %@", [UIFont familyNames]);
+//    NSLog (@"Courier New family fonts: %@", [UIFont fontNamesForFamilyName:@"Open Sans"]);
+//    
+    NSArray *fontFamilies = [UIFont familyNames];
+    
+    for (int i = 0; i < [fontFamilies count]; i++)
+    {
+        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:fontFamily];
+        for (int i=0; i<[fontNames count]; i++) {
+            if ([fontNames[i] containsString:@"Sans"]) {
+                NSLog(@"Semibold: %@",fontNames[i]);
+            }
+        }
+        //NSLog (@"%@: %@", fontFamily, fontNames);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,8 +104,8 @@
     [manager POST:urlAsString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         [sender endRefreshing];
-        NSArray*temp  = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"%@",temp);
+//        NSArray*temp  = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+//        NSLog(@"%@",temp);
         [self.myTableView reloadData];
         self.myTableView.hidden = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -137,6 +160,14 @@
     cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
     cell.profilePic.layer.borderWidth = 2.0;
     cell.profilePic.layer.masksToBounds = YES;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"showService" sender:self];
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self.mySearchBar resignFirstResponder];
 }
 
 @end

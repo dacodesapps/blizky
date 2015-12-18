@@ -7,6 +7,7 @@
 //
 
 #import "FollowersFollowingViewController.h"
+#import "FollowersFollowingTableViewCell.h"
 
 @interface FollowersFollowingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.fromWhereTitle;
+    
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
 }
@@ -40,11 +42,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString* cellIdentifier = @"Cell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    FollowersFollowingTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text=@"Carlos Vela";
-    cell.detailTextLabel.text=@"";
-    cell.imageView.image = [UIImage imageNamed:@"profile.jpg"];
+    cell.username.text = @"Carlos Vela";
+    cell.descriptionCell.text = @"shbxjsdcbdjsahchjbdsjhcbsdjhcbsdhcbasjbdsajchsdbcjadshbcdsajhbdajchd";
+    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
+    cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.profilePic.layer.borderWidth = 2.0;
     
     return cell;
 }

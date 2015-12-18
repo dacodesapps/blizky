@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) UISearchBar *mySearchBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl*segmentedControl;
 
 @end
 
@@ -26,6 +27,9 @@
     self.mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     
     self.myTableView.tableHeaderView = self.mySearchBar;
+    
+    [self.segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"OpenSans-Semibold" size:13.0], NSForegroundColorAttributeName : [UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]} forState:UIControlStateNormal];
+    [self.segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"OpenSans-Semibold" size:13.0], NSForegroundColorAttributeName : [UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]} forState:UIControlStateSelected];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,8 @@
 #import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "BaseTabBarViewController.h"
+#import <Security/Security.h>
+#import "KeychainItemWrapper.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>{
     BOOL keyboardIsShown;
@@ -218,13 +220,12 @@
                               @"password":self.password.text
                               };
     
-   //NSLog(@"%@",parameters);
-    
-    [manager POST:@"http://69.46.5.165:3001/api/Customers/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://69.46.5.166:3002/api/Customers/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         NSDictionary*temp=(NSDictionary*)responseObject;
         //[self setUserAuthentication:YES];
         //[self setLogin:logInResponse[@"login"]];
+        [self setAuthToken:temp[@"id"]];
         NSLog(@"LOGIN: %@", temp);
         [self performSegueWithIdentifier:@"StartApp" sender:self];
 //        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
@@ -237,6 +238,18 @@
         NSLog(@"%@",errorResponse);
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     }];
+}
+
+#pragma mark - Token
+
+-(void)setAuthToken:(NSString*)token{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+}
+
+-(NSString*)authToken{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
 }
 
 /*

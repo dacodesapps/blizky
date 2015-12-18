@@ -34,6 +34,12 @@
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
     
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0f],NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;
+
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.tintColor = [UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0];
     [refreshControl addTarget:self action:@selector(fetchProfile:) forControlEvents:UIControlEventValueChanged];
@@ -78,8 +84,8 @@
     [manager POST:urlAsString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         [sender endRefreshing];
-        NSArray*temp  = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"%@",temp);
+//        NSArray*temp  = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+//        NSLog(@"%@",temp);
         [self.myTableView reloadData];
         self.myTableView.hidden = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -168,7 +174,7 @@
         cell.username.text = @"Carlos Vela";
         cell.descriptionHome.text = @"shbxjsdcbdjsahchjbdsjhcbsdjhcbsdhcbasjbdsajchsdbcjadshbcdsajhbdajchd";
         cell.distanceCategory.text = @"2Km, Categoría";
-        cell.friends.text = @"5 friends";
+        cell.friends.text = @"25 friends";
         cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
         cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
         cell.profilePic.layer.borderWidth = 2.0;

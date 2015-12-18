@@ -31,7 +31,19 @@
 		B00664DD1BFEA55A0061B35B /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */; };
 		B00664E01BFEA7260061B35B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00664DF1BFEA7260061B35B /* MapViewController.m */; };
 		B00664E21BFEA95D0061B35B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00664E11BFEA95D0061B35B /* MapKit.framework */; };
+		B00F90231C1B654600BE763A /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69AA11B51C0BCD1000A1F53F /* OpenSans-Semibold.ttf */; };
+		B0133C761C2225CA004D48F5 /* ServiceTabBarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0133C751C2225CA004D48F5 /* ServiceTabBarTableViewCell.m */; };
+		B03613D91C22450700C95414 /* ServiceFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B03613D81C22450700C95414 /* ServiceFeedTableViewCell.m */; };
+		B04954121C188AB200F32B72 /* FollowersFollowingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B04954111C188AB200F32B72 /* FollowersFollowingTableViewCell.m */; };
 		B05E3AA81C15FDC60000B3DF /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05E3AA71C15FDC60000B3DF /* LaunchViewController.m */; };
+		B05E3AAA1C1663CE0000B3DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B05E3AA91C1663CE0000B3DF /* Security.framework */; };
+		B05E3AAD1C16646E0000B3DF /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B05E3AAC1C16646E0000B3DF /* KeychainItemWrapper.m */; };
+		B0C9FA021C20A2FD0058EB00 /* ServiceProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9FA011C20A2FD0058EB00 /* ServiceProfileViewController.m */; };
+		B0C9FA051C20A4480058EB00 /* ServiceHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9FA041C20A4480058EB00 /* ServiceHeaderTableViewCell.m */; };
+		B0C9FA0B1C20B0D50058EB00 /* Imago-178288.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B0C9FA0A1C20B0D50058EB00 /* Imago-178288.jpg */; };
+		B0C9FA0E1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9FA0D1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.m */; };
+		B0C9FA111C20E9540058EB00 /* ServiceDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9FA101C20E9540058EB00 /* ServiceDescriptionTableViewCell.m */; };
+		B0C9FA141C20F2890058EB00 /* ServiceLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9FA131C20F2890058EB00 /* ServiceLocationTableViewCell.m */; };
 		B0D91B141C0F4883002567E8 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D91B131C0F4883002567E8 /* HomeTableViewCell.m */; };
 		B0D91B181C0F4EC9002567E8 /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D91B171C0F4EC9002567E8 /* BaseTabBarViewController.m */; };
 		B0E146481BF55E9500A8A024 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E146471BF55E9500A8A024 /* main.m */; };
@@ -108,8 +120,28 @@
 		B00664DE1BFEA7260061B35B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		B00664DF1BFEA7260061B35B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		B00664E11BFEA95D0061B35B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B0133C741C2225CA004D48F5 /* ServiceTabBarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTabBarTableViewCell.h; sourceTree = "<group>"; };
+		B0133C751C2225CA004D48F5 /* ServiceTabBarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTabBarTableViewCell.m; sourceTree = "<group>"; };
+		B03613D71C22450700C95414 /* ServiceFeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceFeedTableViewCell.h; sourceTree = "<group>"; };
+		B03613D81C22450700C95414 /* ServiceFeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFeedTableViewCell.m; sourceTree = "<group>"; };
+		B04954101C188AB200F32B72 /* FollowersFollowingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersFollowingTableViewCell.h; sourceTree = "<group>"; };
+		B04954111C188AB200F32B72 /* FollowersFollowingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersFollowingTableViewCell.m; sourceTree = "<group>"; };
 		B05E3AA61C15FDC60000B3DF /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		B05E3AA71C15FDC60000B3DF /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		B05E3AA91C1663CE0000B3DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B05E3AAB1C1664680000B3DF /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		B05E3AAC1C16646E0000B3DF /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		B0C9FA001C20A2FD0058EB00 /* ServiceProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProfileViewController.h; sourceTree = "<group>"; };
+		B0C9FA011C20A2FD0058EB00 /* ServiceProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProfileViewController.m; sourceTree = "<group>"; };
+		B0C9FA031C20A4480058EB00 /* ServiceHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHeaderTableViewCell.h; sourceTree = "<group>"; };
+		B0C9FA041C20A4480058EB00 /* ServiceHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHeaderTableViewCell.m; sourceTree = "<group>"; };
+		B0C9FA0A1C20B0D50058EB00 /* Imago-178288.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Imago-178288.jpg"; sourceTree = "<group>"; };
+		B0C9FA0C1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSegmentedTableViewCell.h; sourceTree = "<group>"; };
+		B0C9FA0D1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSegmentedTableViewCell.m; sourceTree = "<group>"; };
+		B0C9FA0F1C20E9540058EB00 /* ServiceDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		B0C9FA101C20E9540058EB00 /* ServiceDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		B0C9FA121C20F2890058EB00 /* ServiceLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLocationTableViewCell.h; sourceTree = "<group>"; };
+		B0C9FA131C20F2890058EB00 /* ServiceLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLocationTableViewCell.m; sourceTree = "<group>"; };
 		B0D91B121C0F4883002567E8 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		B0D91B131C0F4883002567E8 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		B0D91B161C0F4EC9002567E8 /* BaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
@@ -137,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B05E3AAA1C1663CE0000B3DF /* Security.framework in Frameworks */,
 				B00664E21BFEA95D0061B35B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +241,27 @@
 			name = AFNetworking;
 			sourceTree = "<group>";
 		};
+		B0C9F9FF1C20A2D70058EB00 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B0C9FA001C20A2FD0058EB00 /* ServiceProfileViewController.h */,
+				B0C9FA011C20A2FD0058EB00 /* ServiceProfileViewController.m */,
+				B0C9FA031C20A4480058EB00 /* ServiceHeaderTableViewCell.h */,
+				B0C9FA041C20A4480058EB00 /* ServiceHeaderTableViewCell.m */,
+				B0133C741C2225CA004D48F5 /* ServiceTabBarTableViewCell.h */,
+				B0133C751C2225CA004D48F5 /* ServiceTabBarTableViewCell.m */,
+				B0C9FA0C1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.h */,
+				B0C9FA0D1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.m */,
+				B0C9FA0F1C20E9540058EB00 /* ServiceDescriptionTableViewCell.h */,
+				B0C9FA101C20E9540058EB00 /* ServiceDescriptionTableViewCell.m */,
+				B0C9FA121C20F2890058EB00 /* ServiceLocationTableViewCell.h */,
+				B0C9FA131C20F2890058EB00 /* ServiceLocationTableViewCell.m */,
+				B03613D71C22450700C95414 /* ServiceFeedTableViewCell.h */,
+				B03613D81C22450700C95414 /* ServiceFeedTableViewCell.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		B0D91B111C0F4866002567E8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +289,14 @@
 				69F48B6D1BF7AF76008A7CC4 /* ProfileViewController.m */,
 				69EDAF2C1BFA7F8D00F8FBF2 /* ProfileInfoTableViewCell.h */,
 				69EDAF2D1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m */,
+				B00664DB1BFEA55A0061B35B /* EditProfileViewController.h */,
+				B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */,
+				69B438721C05FD61007B0DE6 /* FollowersFollowingViewController.h */,
+				69B438731C05FD61007B0DE6 /* FollowersFollowingViewController.m */,
+				B04954101C188AB200F32B72 /* FollowersFollowingTableViewCell.h */,
+				B04954111C188AB200F32B72 /* FollowersFollowingTableViewCell.m */,
+				69B438751C06024E007B0DE6 /* AddViewController.h */,
+				69B438761C06024E007B0DE6 /* AddViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -242,6 +304,7 @@
 		B0E1463A1BF55E9500A8A024 = {
 			isa = PBXGroup;
 			children = (
+				B05E3AA91C1663CE0000B3DF /* Security.framework */,
 				B00664E11BFEA95D0061B35B /* MapKit.framework */,
 				B0E146451BF55E9500A8A024 /* Blizky */,
 				B0E1465F1BF55E9500A8A024 /* BlizkyTests */,
@@ -264,19 +327,17 @@
 			isa = PBXGroup;
 			children = (
 				69F48B6F1BF7B5AC008A7CC4 /* profile.jpg */,
+				B0C9FA0A1C20B0D50058EB00 /* Imago-178288.jpg */,
 				B0E146491BF55E9500A8A024 /* AppDelegate.h */,
 				B0E1464A1BF55E9500A8A024 /* AppDelegate.m */,
+				B05E3AAB1C1664680000B3DF /* KeychainItemWrapper.h */,
+				B05E3AAC1C16646E0000B3DF /* KeychainItemWrapper.m */,
 				69AA11AF1C0BC01700A1F53F /* Login */,
 				69AA11B81C0BE34A00A1F53F /* Register */,
 				B0D91B151C0F4E9A002567E8 /* TabBar */,
 				B0D91B111C0F4866002567E8 /* Home */,
 				B0D91B191C0F7DAC002567E8 /* Profile */,
-				B00664DB1BFEA55A0061B35B /* EditProfileViewController.h */,
-				B00664DC1BFEA55A0061B35B /* EditProfileViewController.m */,
-				69B438721C05FD61007B0DE6 /* FollowersFollowingViewController.h */,
-				69B438731C05FD61007B0DE6 /* FollowersFollowingViewController.m */,
-				69B438751C06024E007B0DE6 /* AddViewController.h */,
-				69B438761C06024E007B0DE6 /* AddViewController.m */,
+				B0C9F9FF1C20A2D70058EB00 /* Services */,
 				B00664DE1BFEA7260061B35B /* MapViewController.h */,
 				B00664DF1BFEA7260061B35B /* MapViewController.m */,
 				69B438781C060495007B0DE6 /* ExploreViewController.h */,
@@ -426,8 +487,10 @@
 				69AA11B41C0BCBCA00A1F53F /* OpenSans-Regular.ttf in Resources */,
 				B0E146561BF55E9500A8A024 /* LaunchScreen.storyboard in Resources */,
 				69AA11B71C0BCD8500A1F53F /* OpenSans-Bold.ttf in Resources */,
+				B0C9FA0B1C20B0D50058EB00 /* Imago-178288.jpg in Resources */,
 				B0E146531BF55E9500A8A024 /* Assets.xcassets in Resources */,
 				69F48B701BF7B5AC008A7CC4 /* profile.jpg in Resources */,
+				B00F90231C1B654600BE763A /* OpenSans-Semibold.ttf in Resources */,
 				B0E146511BF55E9500A8A024 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,8 +516,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C9FA051C20A4480058EB00 /* ServiceHeaderTableViewCell.m in Sources */,
 				69B4387A1C060495007B0DE6 /* ExploreViewController.m in Sources */,
 				B0E1464E1BF55E9500A8A024 /* ViewController.m in Sources */,
+				B0C9FA0E1C20DAA20058EB00 /* ServiceSegmentedTableViewCell.m in Sources */,
+				B03613D91C22450700C95414 /* ServiceFeedTableViewCell.m in Sources */,
 				B0D91B181C0F4EC9002567E8 /* BaseTabBarViewController.m in Sources */,
 				B05E3AA81C15FDC60000B3DF /* LaunchViewController.m in Sources */,
 				B0D91B141C0F4883002567E8 /* HomeTableViewCell.m in Sources */,
@@ -470,12 +536,18 @@
 				69F48B6E1BF7AF76008A7CC4 /* ProfileViewController.m in Sources */,
 				B0E146481BF55E9500A8A024 /* main.m in Sources */,
 				69FD8B741C0D6AEE00EEBE83 /* AFURLRequestSerialization.m in Sources */,
+				B0133C761C2225CA004D48F5 /* ServiceTabBarTableViewCell.m in Sources */,
+				B0C9FA021C20A2FD0058EB00 /* ServiceProfileViewController.m in Sources */,
+				B05E3AAD1C16646E0000B3DF /* KeychainItemWrapper.m in Sources */,
 				69FD8B711C0D6AEE00EEBE83 /* AFNetworkReachabilityManager.m in Sources */,
+				B04954121C188AB200F32B72 /* FollowersFollowingTableViewCell.m in Sources */,
+				B0C9FA141C20F2890058EB00 /* ServiceLocationTableViewCell.m in Sources */,
 				69EDAF2E1BFA7F8E00F8FBF2 /* ProfileInfoTableViewCell.m in Sources */,
 				69AA11BB1C0BE38000A1F53F /* RegisterViewController.m in Sources */,
 				B00664E01BFEA7260061B35B /* MapViewController.m in Sources */,
 				69FD8B6E1C0D6AEE00EEBE83 /* AFHTTPRequestOperation.m in Sources */,
 				69AA11AE1C0B9DE200A1F53F /* LoginViewController.m in Sources */,
+				B0C9FA111C20E9540058EB00 /* ServiceDescriptionTableViewCell.m in Sources */,
 				69FD8B701C0D6AEE00EEBE83 /* AFHTTPSessionManager.m in Sources */,
 				69B438771C06024E007B0DE6 /* AddViewController.m in Sources */,
 				69FD8B761C0D6AEE00EEBE83 /* AFURLSessionManager.m in Sources */,
@@ -617,6 +689,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Blizky/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dacodes.Blizky;
@@ -628,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Blizky/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dacodes.Blizky;

@@ -55,6 +55,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Actions
+
+-(IBAction)goLogIn{
+    dispatch_async(dispatch_get_main_queue(),^{
+        [self performSegueWithIdentifier:@"logIn" sender:self];
+    });
+}
+
 /*
 #pragma mark - Navigation
 

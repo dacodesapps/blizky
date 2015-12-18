@@ -7,10 +7,14 @@
 //
 
 #import "AddViewController.h"
+#import "FollowersFollowingTableViewCell.h"
 
 @interface AddViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UIButton *addContacts;
+@property (weak, nonatomic) IBOutlet UIButton *addFacebook;
+@property (weak, nonatomic) IBOutlet UIButton *requests;
 
 @end
 
@@ -19,6 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Add Friend";
+    
+    self.addContacts.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.addFacebook.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.requests.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
 }
@@ -40,11 +49,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString* cellIdentifier = @"Cell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    FollowersFollowingTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-//    cell.textLabel.text=@"Carlos Vela";
-//    cell.detailTextLabel.text=@"";
-//    cell.imageView.image = [UIImage imageNamed:@"profile.jpg"];
+    cell.username.text = @"Carlos Vela";
+    cell.descriptionCell.text = @"shbxjsdcbdjsahchjbdsjhcbsdjhcbsdhcbasjbdsajchsdbcjadshbcdsajhbdajchd";
+    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
+    cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.profilePic.layer.borderWidth = 2.0;
     
     return cell;
 }

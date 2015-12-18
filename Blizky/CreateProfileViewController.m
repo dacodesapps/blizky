@@ -106,18 +106,20 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString* todayDate = [formatter stringFromDate:today];
     
-    if (imageData == nil) {
-        return;
-    }
+//    if (imageData == nil) {
+//        return;
+//    }
     
     NSString *base64String = [imageData base64EncodedStringWithOptions:kNilOptions];  // iOS 7+
+    
+    //NSLog(@"%i",[base64String length]);
     
     NSDictionary*parameters=@{@"firstName": self.name.text,
                               @"lastName": self.lastName.text,
                               @"mobilePhone":self.phoneNumber,
                               @"isPrivateAccount":[NSNumber numberWithBool:true],
                               @"facebookId":[NSNull null],
-                              @"photoUrl":@"",
+                              @"photoUrl":@"tolikuki",
                               @"email":self.email,
                               @"created":todayDate,
                               @"lastUpdated":todayDate,
@@ -127,16 +129,19 @@
     
     NSLog(@"%@",parameters);
     
-    [manager POST:@"http://69.46.5.165:3001/api/Customers" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://69.46.5.166:3002/api/Customers" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         NSDictionary*temp=(NSDictionary*)responseObject;
         //[self setUserAuthentication:YES];
         //[self setLogin:logInResponse[@"login"]];
-        //[self performSegueWithIdentifier:@"Start" sender:self];
+        [self performSegueWithIdentifier:@"StartApp" sender:self];
         NSLog(@"REGISTER: %@", temp);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {;
-        NSLog(@"%@",(NSDictionary*)operation.responseObject);
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+        NSDictionary*errorResponse = (NSDictionary*)operation.responseObject;
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Blizky" message:errorResponse[@"description"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        NSLog(@"%@",errorResponse);
     }];
 }
 
@@ -162,6 +167,9 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     selectedImage = info[UIImagePickerControllerEditedImage];
     imageData = UIImageJPEGRepresentation(selectedImage, 1.0);
+    //NSLog(@"%@",[NSByteCountFormatter stringFromByteCount:imageData.length countStyle:NSByteCountFormatterCountStyleFile]);
+    //NSLog(@"SIZE OF IMAGE: %lu Mb", imageData.length);
+    //imageData = UIImagePNGRepresentation(selectedImage);
     NSLog(@"%@",info);
     [self dismissViewControllerAnimated:YES completion:^{
         [self.profilePicButton setImage:selectedImage forState:UIControlStateNormal];
