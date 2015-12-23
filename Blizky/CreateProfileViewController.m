@@ -112,14 +112,15 @@
     
     NSString *base64String = [imageData base64EncodedStringWithOptions:kNilOptions];  // iOS 7+
     
-    //NSLog(@"%i",[base64String length]);
+    NSLog(@"%@",base64String);
     
     NSDictionary*parameters=@{@"firstName": self.name.text,
                               @"lastName": self.lastName.text,
                               @"mobilePhone":self.phoneNumber,
                               @"isPrivateAccount":[NSNumber numberWithBool:true],
                               @"facebookId":[NSNull null],
-                              @"photoUrl":@"tolikuki",
+                              @"photo":@{@"base64":base64String,
+                                            @"extension":@"jpg"},
                               @"email":self.email,
                               @"created":todayDate,
                               @"lastUpdated":todayDate,

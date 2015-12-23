@@ -13,10 +13,15 @@
 #import "ServiceLocationTableViewCell.h"
 #import "ServiceTabBarTableViewCell.h"
 #import "ServiceFeedTableViewCell.h"
+#import "AFNetworking.h"
+#import <Security/Security.h>
+#import "KeychainItemWrapper.h"
+#import "UIImageView+WebCache.h"
 
 @interface ServiceProfileViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,MKMapViewDelegate>{
     BOOL info;
     BOOL feed;
+    NSDictionary*serviceInfo;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -28,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Service";
+    self.title = self.serviceName;
     
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
@@ -48,11 +53,40 @@
     
     info = YES;
     feed = NO;
+    
+    [self fetchService:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Fetch Data
+
+//@"http://69.46.5.166:3002/api/Suppliers/%@/profile?access_token=ziagnbhJJ1lBHIems1QZL2XNa4JEUvDfZ9oWXJl1T03015gz1OtXnbSr22PF8Gru"
+
+-(void)fetchService:(id)sender{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+    
+    UIRefreshControl*refresh = (UIRefreshControl *)sender;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Suppliers/%@/profile?access_token=%@",self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+        [sender endRefreshing];
+        serviceInfo  = (NSDictionary *)responseObject;
+        NSLog(@"%@",serviceInfo);
+        [self.myTableView reloadData];
+        self.myTableView.hidden = NO;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+        [refresh endRefreshing];
+        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+        [alert show];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 #pragma mark - TableView
@@ -76,10 +110,28 @@
         }else if(indexPath.row == 1 || indexPath.row == 2){
             return 44.0;
         }else if (indexPath.row == 3 || indexPath.row == 4){
-            return 80.0;
+            if (indexPath.row == 3) {
+                CGFloat offsetSection;
+                NSString*string=self.serviceDescription;
+                NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]};
+                CGRect rect = [string boundingRectWithSize:CGSizeMake(282, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+                CGFloat height = rect.size.height;
+                
+                offsetSection = 31 + height + 9;
+                return offsetSection;
+            }else{
+                CGFloat offsetSection;
+                NSString*string=serviceInfo[@"address"];
+                NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]};
+                CGRect rect = [string boundingRectWithSize:CGSizeMake(282, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+                CGFloat height = rect.size.height;
+                
+                offsetSection = 31 + height + 9;
+                return offsetSection;
+            }
         }else{
             CGFloat offsetSection;
-            NSString*string=@"BiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbss";
+            NSString*string=[NSString stringWithFormat:@"%@ \n %@",serviceInfo[@"managerName"],serviceInfo[@"email"]];
             NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]};
             CGRect rect = [string boundingRectWithSize:CGSizeMake(282, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
             CGFloat height = rect.size.height;
@@ -104,8 +156,13 @@
         static NSString* cellIdentifier = @"Cell";
 
         ServiceHeaderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+        
+        cell.serviceName.text = self.serviceName;
+        cell.serviceCategory.text = self.serviceCategory;
         cell.buttonRecommended.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.buttonRecommended setTitle:[NSString stringWithFormat:@"%li",[serviceInfo[@"recomendations"] integerValue]]forState:UIControlStateNormal];
+        [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",self.servicePhoto]] placeholderImage:nil];
+        cell.profilePic.contentMode = UIViewContentModeScaleToFill;
         cell.save.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
         [cell layoutIfNeeded];
@@ -152,11 +209,12 @@
         
         if (indexPath.row == 3) {
             cell.nameDescription.text = @"Service description";
+            cell.labelDescription.text = self.serviceDescription;
         }else{
             cell.nameDescription.text = @"Address";
+            cell.labelDescription.text = serviceInfo[@"address"];
         }
         
-        cell.labelDescription.text = @"labelDescription";
         
         return cell;
         
@@ -171,22 +229,21 @@
         
         ServiceLocationTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
         
-        //cell.textLabel.text = [NSString stringWithFormat:@"Row %i",indexPath.row+1];
         cell.map.delegate = self;
         cell.map.showsCompass = YES;
         cell.map.showsTraffic = YES;
         cell.map.showsScale = YES;
         cell.map.showsUserLocation = YES;
         
-        CLLocationCoordinate2D bakeryPlazaABCoordinate = CLLocationCoordinate2DMake(21.016870, -89.584487);
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([serviceInfo[@"location"][@"lat"] floatValue], [serviceInfo[@"location"][@"lng"] floatValue]);
 
-        MKPointAnnotation *bakeryPlazaABAnnotation = [[MKPointAnnotation alloc] init];
-        bakeryPlazaABAnnotation.title = @"Bakery Plaza Altabrisa";
-        bakeryPlazaABAnnotation.coordinate = bakeryPlazaABCoordinate;
+        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
+        pin.title = self.serviceName;
+        pin.coordinate = coordinate;
         
-        [cell.map showAnnotations:@[bakeryPlazaABAnnotation] animated:NO];
+        [cell.map showAnnotations:@[pin] animated:NO];
         
-        cell.labelOthers.text = @"BiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbssBiodcbjsbdbjsdhbfjashbdfjasdhfbss";
+        cell.labelOthers.text = [NSString stringWithFormat:@"Manager Name: %@\nEmail: %@",serviceInfo[@"managerName"],serviceInfo[@"email"]];
         cell.labelOthers.lineBreakMode = NSLineBreakByCharWrapping;
         
         return cell;
@@ -233,6 +290,18 @@
             [self.myTableView reloadData];
             break;
     }
+}
+
+#pragma mark - Credentials
+
+-(NSString*)authToken{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
+-(NSString*)idUser{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
 }
 
 /*

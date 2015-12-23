@@ -9,8 +9,14 @@
 #import "ViewController.h"
 #import "HomeTableViewCell.h"
 #import "AFNetworking.h"
+#import <Security/Security.h>
+#import "KeychainItemWrapper.h"
+#import "UIImageView+WebCache.h"
+#import "ServiceProfileViewController.h"
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate>{
+    NSArray*response;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) UISearchBar *mySearchBar;
@@ -49,28 +55,6 @@
     [self performSelector:@selector(hideSearchBar) withObject:nil afterDelay:0.0f];
     
     [self fetchSaveServices:nil];
-//    for (int i=0; i<[[UIFont familyNames] count]; i++) {
-//        if ([[UIFont familyNames][i] containsString:@"Semibold"]) {
-//            NSLog(@"Semibold: %@",[UIFont familyNames][i]);
-//        }
-//    }
-
-    //NSLog (@"Font families: %@", [UIFont familyNames]);
-//    NSLog (@"Courier New family fonts: %@", [UIFont fontNamesForFamilyName:@"Open Sans"]);
-//    
-    NSArray *fontFamilies = [UIFont familyNames];
-    
-    for (int i = 0; i < [fontFamilies count]; i++)
-    {
-        NSString *fontFamily = [fontFamilies objectAtIndex:i];
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:fontFamily];
-        for (int i=0; i<[fontNames count]; i++) {
-            if ([fontNames[i] containsString:@"Sans"]) {
-                NSLog(@"Semibold: %@",fontNames[i]);
-            }
-        }
-        //NSLog (@"%@: %@", fontFamily, fontNames);
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,7 +62,6 @@
 }
 
 - (void)hideSearchBar {
-    //self.myTableView.contentOffset = CGPointMake(0, 44);
     self.myTableView.contentOffset = CGPointMake(0, 44);
 }
 
@@ -93,19 +76,16 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
     
     UIRefreshControl*refresh = (UIRefreshControl *)sender;
-
-    NSString *urlAsString = @"http://dacodes.com/Apps/NoticiasAsercom/news.php";
-    NSDictionary*parameters = @{@"countries": @[@"México"],
-                                @"newsletters": @[@"Síntesis Regional",@"Seguimiento a la Competencia"]};
-    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:urlAsString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // Servicios recomendados @"http://69.46.5.166:3002/api/Customers/%@/recomendationsOfServices?access_token=%@",[self idUser],[self authToken]]
+
+    [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/favouritesServices?access_token=%@",[self idUser],[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         [sender endRefreshing];
-//        NSArray*temp  = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"%@",temp);
+        response = (NSArray *)responseObject;
+        NSLog(@"%@",response);
         [self.myTableView reloadData];
         self.myTableView.hidden = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -124,7 +104,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return [response count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -134,24 +114,24 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString* cellIdentifier = @"Cell";
     HomeTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-
-//    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
-//    cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
-//    cell.profilePic.layer.borderWidth = 2.0;
     
-    cell.username.text = @"Carlos Vela";
-    cell.descriptionHome.text = @"shbxjsdcbdjsahchjbdsjhcbsdjhcbsdhcbasjbdsajchsdbcjadshbcdsajhbdajchd";
-    cell.distanceCategory.text = @"2Km, Categoría";
-    cell.friends.text = @"5 friends";
+    //[cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",response[indexPath.row][@"photoUrl"]]] placeholderImage:nil];
+    [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",response[indexPath.row][@"photoUrl"]]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            cell.profilePic.image=image;
+        }
+    }];
+    cell.profilePic.contentMode = UIViewContentModeScaleToFill;
+    cell.username.text = response[indexPath.row][@"serviceName"];
+    cell.descriptionHome.text = response[indexPath.row][@"description"];
+    cell.distanceCategory.text = response[indexPath.row][@"category"][@"name"];
+    cell.friends.text = [NSString stringWithFormat:@"%li friends",[response[indexPath.row][@"friendsRecomendations"] integerValue]];
     cell.buttonRecommended.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [cell.buttonRecommended setTitle:[NSString stringWithFormat:@"%li",[response[indexPath.row][@"recomendations"] integerValue]] forState:UIControlStateNormal];
     
-//    cell.textLabel.text=@"Service";
-//    cell.detailTextLabel.text=@"Addres";
-//    
-//    cell.imageView.image = [UIImage imageNamed:@"profile.jpg"];
-//    [cell layoutIfNeeded];
-//    [cell setNeedsLayout];
-//
+    [cell layoutIfNeeded];
+    [cell setNeedsLayout];
+    
     return cell;
 }
 
@@ -168,6 +148,35 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self.mySearchBar resignFirstResponder];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showService"]) {
+        NSIndexPath*indexPath = [self.myTableView indexPathForSelectedRow];
+        ServiceProfileViewController* destinationController = segue.destinationViewController;
+        destinationController.idService = response[indexPath.row][@"id"];
+        destinationController.serviceName = response[indexPath.row][@"serviceName"];
+        destinationController.serviceCategory = response[indexPath.row][@"category"][@"name"];
+        destinationController.servicePhoto = response[indexPath.row][@"photoUrl"];
+        destinationController.serviceDescription = response[indexPath.row][@"description"];
+    }
+}
+
+#pragma mark - Credentials
+
+-(NSString*)authToken{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
+-(NSString*)idUser{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
 }
 
 @end

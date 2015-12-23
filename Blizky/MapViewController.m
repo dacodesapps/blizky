@@ -62,32 +62,16 @@
 }
 
 -(void)createAnotationsWithStores {
-    CLLocationCoordinate2D bakeryPlazaABCoordinate = CLLocationCoordinate2DMake(21.016870, -89.584487);
-    CLLocationCoordinate2D islaPlazaABCoordinate = CLLocationCoordinate2DMake(21.018512, -89.584948);
-    CLLocationCoordinate2D bakeryGranPlazaCoordinate = CLLocationCoordinate2DMake(21.030267, -89.624193);
-    CLLocationCoordinate2D islaCityCenterCoordinate = CLLocationCoordinate2DMake(21.037522, -89.604464);
-    
-    
-    MKPointAnnotation *bakeryPlazaABAnnotation = [[MKPointAnnotation alloc] init];
-    bakeryPlazaABAnnotation.title = @"Bakery Plaza Altabrisa";
-    bakeryPlazaABAnnotation.coordinate = bakeryPlazaABCoordinate;
-    
-    
-    MKPointAnnotation *islaPlazaABAnnotation = [[MKPointAnnotation alloc] init];
-    islaPlazaABAnnotation.title = @"Isla Plaza Altabrisa";
-    islaPlazaABAnnotation.coordinate = islaPlazaABCoordinate;
-    
-    MKPointAnnotation *bakeryGranPlazaAnnotation = [[MKPointAnnotation alloc] init];
-    bakeryGranPlazaAnnotation.title = @"Bakery Gran Plaza";
-    bakeryGranPlazaAnnotation.coordinate = bakeryGranPlazaCoordinate;
-    
-    MKPointAnnotation *islaPlazaCityCenterAnnotation = [[MKPointAnnotation alloc] init];
-    islaPlazaCityCenterAnnotation.title = @"Isla Plaza City Center";
-    islaPlazaCityCenterAnnotation.coordinate = islaCityCenterCoordinate;
-    
-    [self.map showAnnotations:@[bakeryGranPlazaAnnotation, bakeryPlazaABAnnotation, islaPlazaABAnnotation, islaPlazaCityCenterAnnotation] animated:YES];
-    
-    //annotationsStores = @[bakeryPlazaABAnnotation, islaPlazaABAnnotation, bakeryGranPlazaAnnotation, islaPlazaCityCenterAnnotation];
+    for (int i=0; i<[self.services count]; i++) {
+        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([self.services[i][@"location"][@"lat"] floatValue], [self.services[i][@"location"][@"lng"] floatValue]);
+        
+        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
+        pin.title = self.services[i][@"serviceName"];
+        pin.subtitle = self.services[i][@"address"];
+        pin.coordinate = location;
+        
+        [self.map showAnnotations:@[pin] animated:YES];
+    }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -133,7 +117,7 @@
 //        str = @"Bakery Plaza Altabrisa";
 //    }
     
-    [self performSegueWithIdentifier:@"goProfile" sender:self];
+    //[self performSegueWithIdentifier:@"goProfile" sender:self];
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{

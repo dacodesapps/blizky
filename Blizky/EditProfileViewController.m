@@ -380,23 +380,26 @@
                               @"phone":@"9991439146",
                               @"isPrivateAccount":[NSNumber numberWithBool:true],
                               @"facebookId":[NSNull null],
-                              @"photoUrl":@"",
-                              @"email":@"DaCodes.",
+                              @"photo":@{@"base64":base64String,
+                                                  @"extension":@"jpg"},
+                              @"email":@"carlos.vela@dacodes.com",
                               @"created":todayDate,
                               @"lastUpdated":todayDate,
-                              @"id":[NSNull null]
+                              @"id":[self idUser]
                               };
     
-    NSLog(@"%@",parameters);
+    //NSLog(@"%@",parameters);
+    http://69.46.5.166:3002/api/Customers?access_token=GxWgcT51YExKMT6NZ3g4KmMmZees0zzdB8B93tzUSRKUJR6FNRK3Jytl9tQTaVLN
     
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@",[self authToken]] forHTTPHeaderField:@"Authorization"];
-    [manager.requestSerializer setValue:@"Accept"forHTTPHeaderField:@"application/json"];
-    [manager POST:@"http://69.46.5.165:3001/api/Customers/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //[manager.requestSerializer setValue:[NSString stringWithFormat:@"%@",[self authToken]] forHTTPHeaderField:@"Authorization"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //[manager.requestSerializer setValue:@"Accept"forHTTPHeaderField:@"application/json"];
+    [manager PUT:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers?access_token=%@",[self authToken]] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         NSDictionary*temp=(NSDictionary*)responseObject;
         //[self setUserAuthentication:YES];
         //[self setLogin:logInResponse[@"login"]];
-        [self performSegueWithIdentifier:@"StartApp" sender:self];
+        //[self performSegueWithIdentifier:@"StartApp" sender:self];
         NSLog(@"UPDATE: %@", temp);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {;
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
@@ -411,12 +414,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Token
+#pragma mark - Credentials
 
 -(NSString*)authToken{
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
     return [keychainItem objectForKey:(id)kSecAttrAccount];
 }
+
+-(NSString*)idUser{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
 
 /*
 #pragma mark - Navigation

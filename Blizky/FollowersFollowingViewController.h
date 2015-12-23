@@ -11,5 +11,6 @@
 @interface FollowersFollowingViewController : UIViewController
 
 @property (nonatomic,strong) NSString*fromWhereTitle;
+@property (nonatomic,strong) NSArray*followingsOrFollowers;
 
 @end

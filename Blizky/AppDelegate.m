@@ -23,6 +23,12 @@
 //    tabBar.selectedIndex = 2;
     [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"OpenSans-Bold" size:9.0f], NSFontAttributeName,[UIFont boldSystemFontOfSize:9.0f],NSFontAttributeName,nil] forState:UIControlStateNormal];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
+    if ([self userAuthentication]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BaseTabBarViewController* login = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+        [self.window makeKeyAndVisible];
+        self.window.rootViewController=login;
+    }
     
     return YES;
 }
@@ -48,5 +54,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+-(BOOL)userAuthentication{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"auth"];
+}
+
 
 @end

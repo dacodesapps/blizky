@@ -8,6 +8,7 @@
 
 #import "FollowersFollowingViewController.h"
 #import "FollowersFollowingTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface FollowersFollowingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -37,18 +38,26 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return [self.followingsOrFollowers count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString* cellIdentifier = @"Cell";
     FollowersFollowingTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.username.text = @"Carlos Vela";
-    cell.descriptionCell.text = @"shbxjsdcbdjsahchjbdsjhcbsdjhcbsdhcbasjbdsajchsdbcjadshbcdsajhbdajchd";
+    cell.username.text = [NSString stringWithFormat:@"%@ %@",self.followingsOrFollowers[indexPath.row][@"firstName"],self.followingsOrFollowers[indexPath.row][@"lastName"]];
+    cell.descriptionCell.text = @"Bio";
     cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
     cell.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
     cell.profilePic.layer.borderWidth = 2.0;
+    [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",self.followingsOrFollowers[indexPath.row][@"photoUrl"]]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            cell.profilePic.image=image;
+        }
+    }];
+    
+    [cell layoutIfNeeded];
+    [cell setNeedsLayout];
     
     return cell;
 }

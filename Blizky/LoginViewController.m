@@ -223,9 +223,10 @@
     [manager POST:@"http://69.46.5.166:3002/api/Customers/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         NSDictionary*temp=(NSDictionary*)responseObject;
-        //[self setUserAuthentication:YES];
+        [self setUserAuthentication:YES];
         //[self setLogin:logInResponse[@"login"]];
         [self setAuthToken:temp[@"id"]];
+        [self setIdUser:temp[@"userId"]];
         NSLog(@"LOGIN: %@", temp);
         [self performSegueWithIdentifier:@"StartApp" sender:self];
 //        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
@@ -240,7 +241,7 @@
     }];
 }
 
-#pragma mark - Token
+#pragma mark - Session
 
 -(void)setAuthToken:(NSString*)token{
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
@@ -250,6 +251,25 @@
 -(NSString*)authToken{
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"BlizkyToken" accessGroup:nil];
     return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
+-(void)setIdUser:(NSString*)token{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+}
+
+-(NSString*)idUser{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
+-(void)setUserAuthentication:(BOOL)authentication{
+    [[NSUserDefaults standardUserDefaults] setBool:authentication forKey:@"auth"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(BOOL)userAuthentication{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"auth"];
 }
 
 /*

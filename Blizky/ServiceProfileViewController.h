@@ -10,4 +10,10 @@
 
 @interface ServiceProfileViewController : UIViewController
 
+@property (weak, nonatomic) NSString *idService;
+@property (weak, nonatomic) NSString *serviceName;
+@property (weak, nonatomic) NSString *serviceCategory;
+@property (weak, nonatomic) NSString *servicePhoto;
+@property (weak, nonatomic) NSString *serviceDescription;
+
 @end
