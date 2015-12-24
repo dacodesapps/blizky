@@ -16,6 +16,7 @@
 #import "KeychainItemWrapper.h"
 #import "UIImageView+WebCache.h"
 #import "MapViewController.h"
+#import "ServiceProfileViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource,UITableViewDelegate>{
     BOOL button1;
@@ -83,6 +84,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSLog(@"%@",[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/profile?otherId=%@&access_token=%@",[self idUser],[self idUser],[self authToken]]);
     [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/profile?otherId=%@&access_token=%@",[self idUser],[self idUser],[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         [sender endRefreshing];
@@ -218,8 +220,11 @@
         [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",imageString]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image) {
                 cell.profilePic.image=image;
+                [cell layoutIfNeeded];
+                [cell setNeedsLayout];
             }
         }];
+    
         cell.buttonRecommended.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [cell layoutIfNeeded];
@@ -227,6 +232,10 @@
         
         return cell;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"showService" sender:self];
 }
 
 #pragma mark - Actions
@@ -293,6 +302,16 @@
         FollowersFollowingViewController* destinationController = segue.destinationViewController;
         destinationController.fromWhereTitle = selectedIndex;
         destinationController.followingsOrFollowers = profileInfo[@"friends"];
+    }
+    
+    if ([segue.identifier isEqualToString:@"showService"]) {
+        NSIndexPath*indexPath = [self.myTableView indexPathForSelectedRow];
+        ServiceProfileViewController* destinationController = segue.destinationViewController;
+        destinationController.idService = servicesRecommended[indexPath.row-1][@"id"];
+        destinationController.serviceName = servicesRecommended[indexPath.row-1][@"serviceName"];
+        destinationController.serviceCategory = servicesRecommended[indexPath.row-1][@"category"][@"name"];
+        destinationController.servicePhoto = servicesRecommended[indexPath.row-1][@"thumbnailUrl"];
+        destinationController.serviceDescription = servicesRecommended[indexPath.row-1][@"description"];
     }
 }
 

@@ -55,6 +55,8 @@
     [self performSelector:@selector(hideSearchBar) withObject:nil afterDelay:0.0f];
     
     [self fetchSaveServices:nil];
+    
+    NSLog(@"%@",[self authToken]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

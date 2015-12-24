@@ -54,6 +54,13 @@
     info = YES;
     feed = NO;
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0];
+    [refreshControl addTarget:self action:@selector(fetchService:) forControlEvents:UIControlEventValueChanged];
+    UITableViewController *tableVC = [[UITableViewController alloc]initWithStyle:UITableViewStylePlain];
+    [tableVC setTableView:self.myTableView];
+    tableVC.refreshControl = refreshControl;
+    
     [self fetchService:nil];
 }
 
@@ -83,10 +90,73 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         [refresh endRefreshing];
-        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"Blizky" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
         [alert show];
         NSLog(@"Error: %@", error);
     }];
+}
+
+-(void)fetchFeed:(id)sender{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+    
+    UIRefreshControl*refresh = (UIRefreshControl *)sender;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Suppliers/%@/feeds?access_token=%@",self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+        [sender endRefreshing];
+        NSDictionary* temp  = (NSDictionary *)responseObject;
+        NSLog(@"%@",temp);
+        [self.myTableView reloadData];
+        self.myTableView.hidden = NO;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+        [refresh endRefreshing];
+        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+        [alert show];
+        NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+    }];
+}
+
+-(void)recommendService:(id)sender{
+    UIButton*tempButton = (UIButton *)sender;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+    
+    if ([tempButton tag] == 0) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager PUT:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/recomendationsOfServices/rel/%@?access_token=%@",[self idUser],self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            NSDictionary* temp  = (NSDictionary *)responseObject;
+            NSLog(@"%@",temp);
+            [tempButton setTintColor:[UIColor whiteColor]];
+            [tempButton setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
+            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
+            tempButton.tag = 2;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+        }];
+    }else{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager DELETE:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/recomendationsOfServices/rel/%@?access_token=%@",[self idUser],self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            NSDictionary* temp  = (NSDictionary *)responseObject;
+            NSLog(@"%@",temp);
+            [tempButton setTintColor:[UIColor whiteColor]];
+            [tempButton setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
+            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+        }];
+    }
 }
 
 #pragma mark - TableView
@@ -131,7 +201,7 @@
             }
         }else{
             CGFloat offsetSection;
-            NSString*string=[NSString stringWithFormat:@"%@ \n %@",serviceInfo[@"managerName"],serviceInfo[@"email"]];
+            NSString*string=[NSString stringWithFormat:@"Manager Name: %@\nEmail: %@\nPhone: %@",serviceInfo[@"managerName"],serviceInfo[@"email"],serviceInfo[@"phone"]];
             NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]};
             CGRect rect = [string boundingRectWithSize:CGSizeMake(282, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
             CGFloat height = rect.size.height;
@@ -159,10 +229,37 @@
         
         cell.serviceName.text = self.serviceName;
         cell.serviceCategory.text = self.serviceCategory;
+        
+        if ([serviceInfo[@"isRecommendedByMe"] integerValue] == 0) {
+            [cell.buttonRecommended setTintColor:[UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]];
+            [cell.buttonRecommended setBackgroundColor:[UIColor whiteColor]];
+            cell.buttonRecommended.tag = 0;
+        }else{
+            [cell.buttonRecommended setTintColor:[UIColor whiteColor]];
+            [cell.buttonRecommended setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
+            cell.buttonRecommended.tag = 1;
+        }
         cell.buttonRecommended.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [cell.buttonRecommended setTitle:[NSString stringWithFormat:@"%li",[serviceInfo[@"recomendations"] integerValue]]forState:UIControlStateNormal];
-        [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",self.servicePhoto]] placeholderImage:nil];
+        [cell.buttonRecommended addTarget:self action:@selector(recommendService:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([serviceInfo[@"isInMyFavorites"] integerValue] == 0) {
+            [cell.save setTintColor:[UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]];
+            [cell.save setBackgroundColor:[UIColor whiteColor]];
+        }else{
+            [cell.save setTintColor:[UIColor whiteColor]];
+            [cell.save setBackgroundColor:[UIColor colorWithRed:69.0/255.0 green:146.0/255.0 blue:247.0/255.0 alpha:1.0]];
+        }
+        
+        NSString *imageString = self.servicePhoto;
+        NSRange range = [imageString rangeOfString:@"?dimension=thumbs"];
+        if (range.location != NSNotFound) {
+            imageString = [imageString substringWithRange:NSMakeRange(0, range.location)];
+        }
+        
+        [cell.profilePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",imageString]] placeholderImage:nil];
         cell.profilePic.contentMode = UIViewContentModeScaleToFill;
+        
         cell.save.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
         [cell layoutIfNeeded];
@@ -235,15 +332,17 @@
         cell.map.showsScale = YES;
         cell.map.showsUserLocation = YES;
         
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([serviceInfo[@"location"][@"lat"] floatValue], [serviceInfo[@"location"][@"lng"] floatValue]);
-
-        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-        pin.title = self.serviceName;
-        pin.coordinate = coordinate;
+        if (![serviceInfo[@"location"] isEqual:[NSNull null]]) {
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([serviceInfo[@"location"][@"lat"] floatValue], [serviceInfo[@"location"][@"lng"] floatValue]);
+            
+            MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
+            pin.title = self.serviceName;
+            pin.coordinate = coordinate;
+            
+            [cell.map showAnnotations:@[pin] animated:NO];
+        }
         
-        [cell.map showAnnotations:@[pin] animated:NO];
-        
-        cell.labelOthers.text = [NSString stringWithFormat:@"Manager Name: %@\nEmail: %@",serviceInfo[@"managerName"],serviceInfo[@"email"]];
+        cell.labelOthers.text = [NSString stringWithFormat:@"Manager Name: %@\nEmail: %@\nPhone: %@",serviceInfo[@"managerName"],serviceInfo[@"email"],serviceInfo[@"phone"]];
         cell.labelOthers.lineBreakMode = NSLineBreakByCharWrapping;
         
         return cell;
@@ -287,6 +386,7 @@
             NSLog(@"Feed");
             info = NO;
             feed = YES;
+            [self fetchFeed:nil];
             [self.myTableView reloadData];
             break;
     }
