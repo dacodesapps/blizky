@@ -33,7 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.serviceName;
+    //self.title = self.serviceName;
+    self.title = @"Service";
     
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
@@ -97,26 +98,26 @@
 }
 
 -(void)fetchFeed:(id)sender{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-    
-    UIRefreshControl*refresh = (UIRefreshControl *)sender;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Suppliers/%@/feeds?access_token=%@",self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-        [sender endRefreshing];
-        NSDictionary* temp  = (NSDictionary *)responseObject;
-        NSLog(@"%@",temp);
-        [self.myTableView reloadData];
-        self.myTableView.hidden = NO;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-        [refresh endRefreshing];
-        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
-        [alert show];
-        NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
-    }];
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+//    
+//    UIRefreshControl*refresh = (UIRefreshControl *)sender;
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    [manager GET:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Suppliers/%@/feeds?access_token=%@",self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+//        [sender endRefreshing];
+//        NSDictionary* temp  = (NSDictionary *)responseObject;
+//        NSLog(@"%@",temp);
+//        [self.myTableView reloadData];
+//        self.myTableView.hidden = NO;
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+//        [refresh endRefreshing];
+//        UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+//        [alert show];
+//        NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+//    }];
 }
 
 -(void)recommendService:(id)sender{
@@ -133,11 +134,11 @@
             [tempButton setTintColor:[UIColor whiteColor]];
             [tempButton setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
             [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
-            tempButton.tag = 2;
+            tempButton.tag = 1;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
-            [alert show];
+//            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+//            [alert show];
             NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
         }];
     }else{
@@ -147,17 +148,60 @@
             [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
             NSDictionary* temp  = (NSDictionary *)responseObject;
             NSLog(@"%@",temp);
-            [tempButton setTintColor:[UIColor whiteColor]];
-            [tempButton setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0]];
-            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
+            [tempButton setTintColor:[UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]];
+            [tempButton setBackgroundColor:[UIColor whiteColor]];
+            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] - 1] forState:UIControlStateNormal];
+            tempButton.tag = 0;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
-            [alert show];
+//            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+//            [alert show];
             NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
         }];
     }
 }
+
+-(void)saveService:(id)sender{
+    UIButton*tempButton = (UIButton *)sender;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+    
+    if ([tempButton tag] == 0) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager PUT:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/favouritesServices/rel/%@?access_token=%@",[self idUser],self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            NSDictionary* temp  = (NSDictionary *)responseObject;
+            NSLog(@"%@",temp);
+            [tempButton setTintColor:[UIColor whiteColor]];
+            [tempButton setBackgroundColor:[UIColor colorWithRed:69.0/255.0 green:146.0/255.0 blue:247.0/255.0 alpha:1.0]];
+            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
+            tempButton.tag = 1;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+//            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+//            [alert show];
+            NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+        }];
+    }else{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager DELETE:[NSString stringWithFormat:@"http://69.46.5.166:3002/api/Customers/%@/favouritesServices/rel/%@?access_token=%@",[self idUser],self.idService,[self authToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            NSDictionary* temp  = (NSDictionary *)responseObject;
+            NSLog(@"%@",temp);
+            [tempButton setTintColor:[UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]];
+            [tempButton setBackgroundColor:[UIColor whiteColor]];
+            [tempButton setTitle:[NSString stringWithFormat:@"%li",[tempButton.titleLabel.text integerValue] - 1] forState:UIControlStateNormal];
+            tempButton.tag = 0;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+//            UIAlertView*alert=[[UIAlertView alloc] initWithTitle:@"TeleNews Pro" message:@"No se puede conectar a internet" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+//            [alert show];
+            NSLog(@"Error: %@", (NSDictionary *)operation.responseObject);
+        }];
+    }
+}
+
 
 #pragma mark - TableView
 
@@ -240,16 +284,19 @@
             cell.buttonRecommended.tag = 1;
         }
         cell.buttonRecommended.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [cell.buttonRecommended setTitle:[NSString stringWithFormat:@"%li",[serviceInfo[@"recomendations"] integerValue]]forState:UIControlStateNormal];
+        [cell.buttonRecommended setTitle:[NSString stringWithFormat:@"%li",[serviceInfo[@"recomendations"] integerValue]] forState:UIControlStateNormal];
         [cell.buttonRecommended addTarget:self action:@selector(recommendService:) forControlEvents:UIControlEventTouchUpInside];
         
         if ([serviceInfo[@"isInMyFavorites"] integerValue] == 0) {
             [cell.save setTintColor:[UIColor colorWithRed:48.0/255.0 green:46.0/255.0 blue:47.0/255.0 alpha:1.0]];
             [cell.save setBackgroundColor:[UIColor whiteColor]];
+            cell.save.tag = 0;
         }else{
             [cell.save setTintColor:[UIColor whiteColor]];
             [cell.save setBackgroundColor:[UIColor colorWithRed:69.0/255.0 green:146.0/255.0 blue:247.0/255.0 alpha:1.0]];
+            cell.save.tag = 1;
         }
+        [cell.save addTarget:self action:@selector(saveService:) forControlEvents:UIControlEventTouchUpInside];
         
         NSString *imageString = self.servicePhoto;
         NSRange range = [imageString rangeOfString:@"?dimension=thumbs"];

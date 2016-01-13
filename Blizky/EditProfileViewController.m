@@ -47,16 +47,19 @@
     self.name.offsetX = 40;
     self.name.delegate = self;
     self.name.tag = 1;
+    self.name.text = self.firstName;
     
     //self.lastName.offsetX = 20;
     self.lastName.offsetX = 40;
     self.lastName.delegate = self;
     self.lastName.tag = 2;
+    self.lastName.text = self.lastNameUser;
     
     //self.bio.textContainerInset = UIEdgeInsetsMake(7.0, 15.0, 0.0, 0.0);
     self.bio.textContainerInset = UIEdgeInsetsMake(7.0, 35.0, 0.0, 0.0);
     self.bio.delegate = self;
-    
+    self.bio.text = [self.bioUser isEqualToString:@""] ? @"Bio" : self.bioUser;
+
     self.name.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.lastName.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.bio.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -68,6 +71,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:self.view.window];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)viewDidLayoutSubviews{

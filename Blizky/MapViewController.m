@@ -8,6 +8,9 @@
 
 #import "MapViewController.h"
 #import "ProfileViewController.h"
+#import "UIImageView+WebCache.h"
+#import "TagPin.h"
+#import "ServiceProfileViewController.h"
 
 @import MapKit;
 
@@ -22,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Network";
+    self.title = @"Map";
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -62,19 +65,38 @@
 }
 
 -(void)createAnotationsWithStores {
+    NSMutableArray *services = [[NSMutableArray alloc] init];
     for (int i=0; i<[self.services count]; i++) {
-        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([self.services[i][@"location"][@"lat"] floatValue], [self.services[i][@"location"][@"lng"] floatValue]);
-        
-        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-        pin.title = self.services[i][@"serviceName"];
-        pin.subtitle = self.services[i][@"address"];
-        pin.coordinate = location;
-        
-        [self.map showAnnotations:@[pin] animated:YES];
+        if (![self.services[i][@"location"] isEqual:[NSNull null]]) {
+            CLLocationCoordinate2D location = CLLocationCoordinate2DMake([self.services[i][@"location"][@"lat"] floatValue], [self.services[i][@"location"][@"lng"] floatValue]);
+            
+            TagPin *pin = [[TagPin alloc] init];
+            pin.title = self.services[i][@"serviceName"];
+            pin.subtitle = self.services[i][@"address"];
+            pin.coordinate = location;
+            pin.tag = i;
+            
+            [services addObject:pin];
+        }
     }
+    [self.map showAnnotations:services animated:YES];
+    
+    MKMapRect zoomRect = MKMapRectNull;
+    for (id <MKAnnotation> annotation in self.map.annotations)
+    {
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    }
+    //[self.map setVisibleMapRect:zoomRect animated:YES];
+    double inset = -zoomRect.size.width * 0.1;
+    [self.map setVisibleMapRect:MKMapRectInset(zoomRect, inset, inset) animated:YES];
+    //self.map.camera.altitude *= 1.4;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    TagPin*view =  (TagPin *)annotation;
+    
     static NSString *identifier = @"MyPin";
     if ([annotation isKindOfClass:MKUserLocation.class]) {
         return nil;
@@ -89,8 +111,22 @@
         //annotationView.animatesDrop = YES;
     }
     UIImageView *leftIconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [leftIconView setImage:[UIImage imageNamed:@"kukisLogoPin"]];
+    NSString *imageString = self.services[view.tag][@"thumbnailUrl"];
+    NSRange range = [imageString rangeOfString:@"?dimension=thumbs"];
+    if (range.location != NSNotFound) {
+        imageString = [imageString substringWithRange:NSMakeRange(0, range.location)];
+    }
+    [leftIconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://69.46.5.166:3002%@",imageString]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            leftIconView.image=image;
+        }
+    }];
     annotationView.leftCalloutAccessoryView = leftIconView;
+    
+    leftIconView.layer.cornerRadius = leftIconView.frame.size.width/2;
+    leftIconView.layer.borderColor = [UIColor clearColor].CGColor;
+    leftIconView.layer.borderWidth = 2.0;
+    leftIconView.layer.masksToBounds = YES;
     
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     [infoButton addTarget:self action:@selector(showDetailView:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,8 +137,7 @@
 }
 
 -(void)showDetailView:(UIButton *) sender{
-    
-//    MKPointAnnotation *point =  [self.map selectedAnnotations][0];
+    [self performSegueWithIdentifier:@"showService" sender:self];
 //    
 //    
 //    NSString *str;
@@ -120,19 +155,14 @@
     //[self performSegueWithIdentifier:@"goProfile" sender:self];
 }
 
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-    NSLog(@"tap");
-}
+//-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+//    NSLog(@"tap");
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//-(IBAction)back:(id)sender{
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
-
 
 #pragma mark - Navigation
 
@@ -140,6 +170,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    TagPin *point =  [self.map selectedAnnotations][0];
+    ServiceProfileViewController* destinationController = segue.destinationViewController;
+    destinationController.idService = self.services[point.tag][@"id"];
+    destinationController.serviceName = self.services[point.tag][@"serviceName"];
+    destinationController.serviceCategory = self.services[point.tag][@"category"][@"name"];
+    destinationController.servicePhoto = self.services[point.tag][@"thumbnailUrl"];
+    destinationController.serviceDescription = self.services[point.tag][@"description"];
     self.tabBarController.tabBar.hidden=NO;
 }
 

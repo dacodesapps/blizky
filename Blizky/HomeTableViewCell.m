@@ -15,9 +15,7 @@
 }
 
 -(void)layoutSubviews{
-//    self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2;
-//    self.profilePic.layer.borderColor = [UIColor clearColor].CGColor;
-//    self.profilePic.layer.borderWidth = 2.0;
+    [super layoutSubviews];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

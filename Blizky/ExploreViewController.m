@@ -20,6 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0f],NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:243.0/255.0 green:44.0/255.0 blue:55.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;
+    
     self.title = @"Explore";
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;

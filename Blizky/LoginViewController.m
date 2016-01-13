@@ -225,6 +225,7 @@
         NSDictionary*temp=(NSDictionary*)responseObject;
         [self setUserAuthentication:YES];
         //[self setLogin:logInResponse[@"login"]];
+        [self setEmailUser:self.username.text];
         [self setAuthToken:temp[@"id"]];
         [self setIdUser:temp[@"userId"]];
         NSLog(@"LOGIN: %@", temp);
@@ -234,8 +235,12 @@
 //        appDelegateTemp.window.rootViewController = tabBar;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSDictionary*errorResponse = (NSDictionary*)operation.responseObject;
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Blizky" message:errorResponse[@"description"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Blizky" message:@"Connection failure" preferredStyle:UIAlertControllerStyleAlert]; // 1
+        UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Accept" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            NSLog(@"Accept");
+        }];
+        [alert addAction:firstAction];
+        [self presentViewController:alert animated:YES completion:nil];
         NSLog(@"%@",errorResponse);
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     }];
@@ -260,6 +265,16 @@
 
 -(NSString*)idUser{
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"idUser" accessGroup:nil];
+    return [keychainItem objectForKey:(id)kSecAttrAccount];
+}
+
+-(void)setEmailUser:(NSString*)token{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"emailUser" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+}
+
+-(NSString*)emailUser{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"emailUser" accessGroup:nil];
     return [keychainItem objectForKey:(id)kSecAttrAccount];
 }
 

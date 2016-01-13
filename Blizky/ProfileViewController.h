@@ -10,4 +10,6 @@
 
 @interface ProfileViewController : UIViewController
 
+@property (nonatomic,assign) NSString*idUserProfile;
+
 @end

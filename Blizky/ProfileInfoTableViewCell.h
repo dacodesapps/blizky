@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *services;
 @property (weak, nonatomic) IBOutlet UIButton *followers;
 @property (weak, nonatomic) IBOutlet UIButton *following;
+@property (weak, nonatomic) IBOutlet UISegmentedControl*segmentedControl;
+
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 @property (weak, nonatomic) IBOutlet UIButton *button3;

@@ -10,4 +10,8 @@
 
 @interface EditProfileViewController : UIViewController
 
+@property (nonatomic,strong) NSString*firstName;
+@property (nonatomic,strong) NSString*lastNameUser;
+@property (nonatomic,strong) NSString*bioUser;
+
 @end

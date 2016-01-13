@@ -11,10 +11,14 @@
 @interface HomeTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
-@property (weak, nonatomic) IBOutlet UILabel *username;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionHome;
-@property (weak, nonatomic) IBOutlet UILabel *distanceCategory;
+@property (weak, nonatomic) IBOutlet UILabel *serviceName;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionService;
+@property (weak, nonatomic) IBOutlet UILabel *categoryService;
+@property (weak, nonatomic) IBOutlet UILabel *locationService;
 @property (weak, nonatomic) IBOutlet UILabel *friends;
 @property (weak, nonatomic) IBOutlet UIButton *buttonRecommended;
+@property (weak, nonatomic) IBOutlet UIButton *buttonTag;
+@property (weak, nonatomic) IBOutlet UIButton *buttonOpenCell;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMore;
 
 @end
